@@ -2,8 +2,11 @@
 <script lang="ts" setup>
   import { ref, reactive, computed, defineProps, watch, useTemplateRef, onMounted } from 'vue';
   // import TodoItem from './TodoItem.vue';
+  import ButtonCounter from '../components/ButtonCounter.vue'
+  import BlogPost from '../components/BlogPost.vue';
+  import AlertBox from '../components/AlertBox.vue';
 
-  // Template Syntax, Class & Style Bindings
+  // // Template Syntax, Class & Style Bindings
   // const title = ref<string>('Attribute Binding');
   // const isRed = ref<boolean>(true);
   // const color = ref<string>('green');
@@ -27,7 +30,7 @@
   // })
 
 
-  // Computed Properties
+  // // Computed Properties
   // const author = reactive({
   //   name: 'John Author',
   //   books: [
@@ -50,81 +53,95 @@
   //   }
   // })
 
-  // Conditional and List Rendering
-//   const vIf = ref(true);
-//   const toggleVif = ref(true);
-//   const vShow = ref(true);
-//   const parentMessage = ref('Parent');
-//   const items = ref([
-//     { message: 'Item 1' },
-//     { message: 'Item 2' }
-//   ]);
-//   const myObject = reactive({
-//     title: 'How to do lists in Vue',
-//     author: 'Jane Doe',
-//     publishedAt: '2016-04-10'
-//   })
-//   let id = 0;
-//   const newTodo = ref('');
-//   const hideCompleted = ref(false)
-//   const todos = ref([
-//   { id: id++, text: 'Learn HTML', done: true },
-//   { id: id++, text: 'Learn JavaScript', done: true },
-//   { id: id++, text: 'Learn Vue', done: false }
-// ])
-//   let newTodoId = 4;
-//   function addTodo() {
-//     todos.value.push({
-//       id: id++,
-//       text: newTodo.value,
-//       done: false
-//     })
-//     newTodo.value = '';
-//   }
-//   function removeTodo(todo) {
-//     todos.value = todos.value.filter((t) => t !== todo)
-//   }
-//   function shout(warning: string) {
-//     alert(warning)
-//   }
+  // // Conditional and List Rendering
+  //   const vIf = ref(true);
+  //   const toggleVif = ref(true);
+  //   const vShow = ref(true);
+  //   const parentMessage = ref('Parent');
+  //   const items = ref([
+  //     { message: 'Item 1' },
+  //     { message: 'Item 2' }
+  //   ]);
+  //   const myObject = reactive({
+  //     title: 'How to do lists in Vue',
+  //     author: 'Jane Doe',
+  //     publishedAt: '2016-04-10'
+  //   })
+  //   let id = 0;
+  //   const newTodo = ref('');
+  //   const hideCompleted = ref(false)
+  //   const todos = ref([
+  //   { id: id++, text: 'Learn HTML', done: true },
+  //   { id: id++, text: 'Learn JavaScript', done: true },
+  //   { id: id++, text: 'Learn Vue', done: false }
+  // ])
+  //   let newTodoId = 4;
+  //   function addTodo() {
+  //     todos.value.push({
+  //       id: id++,
+  //       text: newTodo.value,
+  //       done: false
+  //     })
+  //     newTodo.value = '';
+  //   }
+  //   function removeTodo(todo) {
+  //     todos.value = todos.value.filter((t) => t !== todo)
+  //   }
+  //   function shout(warning: string) {
+  //     alert(warning)
+  //   }
 
-  // Form Handling
-  const textInput = ref('');
-  const textareaInput = ref('');
-  const checkedNames = ref([]);
-  const radioPicked = ref([]);
-  const selectedInput = ref([]);
-  const options = ref([
-    { value: "A" }, { value: "B" },
-    { value: "C" }, { value: "D" },
-  ]);
+  // // Form Handling
+  // const textInput = ref('');
+  // const textareaInput = ref('');
+  // const checkedNames = ref([]);
+  // const radioPicked = ref([]);
+  // const selectedInput = ref([]);
+  // const options = ref([
+  //   { value: "A" }, { value: "B" },
+  //   { value: "C" }, { value: "D" },
+  // ]);
 
-  // Watchers
-  const questionWatchers = ref('');
-  const answerWatchers = ref('Questions usually contain a question mark. ;-)');
-  const loadingWatchers = ref(false);
-  watch(questionWatchers, async (newQuestion, oldQuestion) => {
-    if (newQuestion.includes('?')) {
-      loadingWatchers.value = true;
-      answerWatchers.value = 'Thinking...';
-      try {
-        const res = await fetch('https://yesno.wtf/api');
-        answerWatchers.value = (await res.json()).answer;
-      } catch (error) {
-        answerWatchers.value = 'Error! Could not reach the API. ' + error;
-      } finally {
-        loadingWatchers.value = false;
-      }
-    }
-  },
-  { once: true }
-);
+  //   // Watchers
+  //   const questionWatchers = ref('');
+  //   const answerWatchers = ref('Questions usually contain a question mark. ;-)');
+  //   const loadingWatchers = ref(false);
+  //   watch(questionWatchers, async (newQuestion, oldQuestion) => {
+  //     if (newQuestion.includes('?')) {
+  //       loadingWatchers.value = true;
+  //       answerWatchers.value = 'Thinking...';
+  //       try {
+  //         const res = await fetch('https://yesno.wtf/api');
+  //         answerWatchers.value = (await res.json()).answer;
+  //       } catch (error) {
+  //         answerWatchers.value = 'Error! Could not reach the API. ' + error;
+  //       } finally {
+  //         loadingWatchers.value = false;
+  //       }
+  //     }
+  //   },
+  //   { once: true }
+  // );
 
-// Template Refs
-const templateInput = useTemplateRef('text-input');
-onMounted(() => {
-  templateInput.value.focus();
-})
+  // // Template Refs
+  // const templateInput = useTemplateRef('text-input');
+  // onMounted(() => {
+  //   templateInput.value.focus();
+  // })
+
+  // Component Basics
+  const posts = ref([
+    { id: 1, title: 'My journey with Vue' },
+    { id: 2, title: 'Blogging with Vue' },
+    { id: 3, title: 'Why Vue is so fun' }
+  ])
+  const postFontSize = ref(1);
+
+  // Lifecycle Hooks
+  onMounted(() => {
+    // alert('This component is now mounted and there should be an alert.');
+    console.log(`the component is now mounted.`);
+  })
 
 
 </script>
@@ -167,8 +184,8 @@ onMounted(() => {
     </div> -->
 
     <!-- Conditional and List Rendering -->
-    <div>
-      <!-- <h3>Conditional and List Rendering</h3>
+    <!-- <div>
+      <h3>Conditional and List Rendering</h3>
       <p>
         <span v-if="vIf">Vue is awesome!. V-if is true</span>
         <span v-else>Oh no 😢, v-if is false</span> &NonBreakingSpace;
@@ -209,11 +226,11 @@ onMounted(() => {
         </button>
         &NonBreakingSpace;
         <button @click="shout('Done!!')">Alert done</button>
-      </div> -->
-    </div>
+      </div>
+    </div> -->
 
     <!-- Form Handling -->
-    <div>
+    <!-- <div>
       <h2>Form Handling</h2>
       <div>
         <p>Text message is: {{ textInput }}</p>
@@ -259,14 +276,8 @@ onMounted(() => {
 
       <div>
         <p>Selected: {{ selectedInput }}</p>
-
         <label for="select">
           <select v-model="selectedInput" name="select" id="select">
-            <!-- <option value="" disabled>Please select one</option>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option> -->
-
             <option value="" disabled>Please select one</option>
             <option v-for="option in options" :key="option.value" :value="options.value">
               {{ option.value }}
@@ -274,10 +285,10 @@ onMounted(() => {
           </select>
         </label>
       </div>
-    </div>
+    </div> -->
 
     <!-- Watchers -->
-    <div>
+    <!-- <div>
       <h2>Watchers</h2>
       <p>
         Ask a yes/no question
@@ -286,16 +297,56 @@ onMounted(() => {
         </label>
       </p>
       {{ answerWatchers }}
-    </div>
+    </div> -->
 
     <!-- ComponentBaics -->
+    <div>
+      <h2>Component Basics</h2>
+      <div>
+        <h3>Here are many child components!</h3>
+        <ButtonCounter :counterArg="2"/>
+        <ButtonCounter :counterArg="4"/>
+        <ButtonCounter :counterArg="6"/>
+      </div>
+
+      <div>
+        <h3>Titles to the BlogPosts</h3>
+        <div :style="{ fontSize: postFontSize + 'em' }">
+          <BlogPost
+            v-for="post in posts" :key="post.id"
+            :title="post.title" @enlarge-text="postFontSize += 0.1"
+          />
+        </div>
+      </div>
+
+      <div>
+        <AlertBox>
+          Something bad happened
+        </AlertBox>
+      </div>
+    </div>
+
+    <!-- Lifecycle Hooks -->
+    <div>
+      <ul>
+        <li>beforeCreate</li>
+        <li>created</li>
+        <li>beforeMount</li>
+        <li>mounted</li>
+        <li>
+          Mounted: loop of beforeUpdate and Update (when data changes)
+        </li>
+        <li>When component is unmounted: beforeUnmount </li>
+        <li>unmounted</li>
+      </ul>
+    </div>
 
   </div>
 </template>
 
 
 
-<style scoped>
+<style lang="css" scoped>
  h2 {
   text-align: center;
   font-weight: 600;
