@@ -11,13 +11,15 @@ import BlogPost from './components/BlogPost.vue'
 import TodoItem from './components/TodoItem.vue'
 import TestEssentials from './components/TestEssentials.vue'
 import ComponentsDepth from './components/ComponentsDepth.vue'
+import MyComponent from './components/MyComponent.vue'
 
 const app = createApp(App)
 
 app
-  .component('ButtonCounter', ButtonCounter)
-  .component('BlogPost', BlogPost)
   .component('AlertBox', AlertBox)
+  .component('BlogPost', BlogPost)
+  .component('ButtonCounter', ButtonCounter)
+  .component('MyComponent', MyComponent)
   .component('TodoItem',TodoItem)
 
   .component('TestEssentials', TestEssentials)

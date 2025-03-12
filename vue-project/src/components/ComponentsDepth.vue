@@ -44,7 +44,14 @@ import { ref } from 'vue';
     alert('This button is working');
   }
 
-  
+  // Component v-model
+  const modelMsg = ref<string>('modelValue');
+  const compT = ref<string>('compTitle');
+
+  const modelMsgs = ref<string>('model2');
+  const compTitles = ref<string>('compTitle2');
+
+
 
 </script>
 
@@ -53,12 +60,12 @@ import { ref } from 'vue';
     <div>
       <h1>Components In-Depth</h1>
 
-      <!-- Props Declaration -->
+      <!-- Props and Event -->
       <div>
-        <h2>Props Declaration</h2>
+        <h2>Props Declaration and Component Events</h2>
         <p>Greeting message is: {{ greetingMessage }}</p>
         <div v-for="post in posts" :key="post.id">
-          <BlogPost
+          <BlogPost class="component comp1"
             :title="post.title" :likes="post.likes"
             :author="post.author" :buttontext="post.buttontext"
             @alert-text="alertmsg"
@@ -66,15 +73,25 @@ import { ref } from 'vue';
         </div>
       </div>
 
-      <!-- Event Handling -->
-       <div>
-          <h2>Event Handling</h2>
-       </div>
+      <!-- Component v-model -->
+      <div>
+        <h2>Component v-model</h2>
+        <p>Model message is: {{ modelMsg }}</p>
+        <p>My Component Title is: {{ compT }}</p>
+        <MyComponent class="component comp2"
+          v-model:model-message="modelMsg"
+          v-model:comp-title="compT"
+        />
+        <p>Model message is: {{ modelMsgs }}</p>
+        <p>My Component Title is: {{ compTitles }}</p>
+        <MyComponent class="component comp2"
+          v-model:model-message="modelMsgs"
+          v-model:comp-title="compTitles"
+        />
+      </div>
     </div>
   </div>
 </template>
-
-
 
 <style lang="css" scoped>
   h1 {
@@ -91,24 +108,16 @@ import { ref } from 'vue';
     font-size: 1.1rem;
   }
 
- /* Template Syntax */
-  .red {
-    color: red;
+  .component {
+    padding: 0.5rem 1rem 0.5rem 0;
+    margin: 0.5rem 0;
   }
 
-  .active {
-    color: green;
-  }
-
-  .done {
-    text-decoration: line-through;
-  }
-
-  label {
-    border: 1px solid grey;
-    display: inline-flex;
-    border-radius: 0.5rem;
-    padding: 0.5rem 1rem;
-    margin: 0.5rem;
+  .comp2 {
+    padding: 0.5rem 1rem 0.5rem 0;
+    display: flex;
+    flex-direction: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 </style>
