@@ -1,6 +1,9 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import IconDocumentation from './icons/IconDocumentation.vue';
+import IconEcosystem from './icons/IconEcosystem.vue';
+import IconSupport from './icons/IconSupport.vue';
   // Props Declaration
   const props = defineProps<{
     title?: String,
@@ -51,6 +54,15 @@ import { ref } from 'vue';
   const modelMsgs = ref<string>('model2');
   const compTitles = ref<string>('compTitle2');
 
+  // SLot
+  const fancyMessage = ref<string>('Click Me!');
+  // const slotProps = ref<{ text: string, count: number}>({
+  //   text: '',
+  //   count: 0
+  // })
+  const slotItems = ref([
+    { id: 1, item: 'Item 1' }
+  ])
 
 
 </script>
@@ -61,7 +73,7 @@ import { ref } from 'vue';
       <h1>Components In-Depth</h1>
 
       <!-- Props and Event -->
-      <div>
+      <!-- <div>
         <h2>Props Declaration and Component Events</h2>
         <p>Greeting message is: {{ greetingMessage }}</p>
         <div v-for="post in posts" :key="post.id">
@@ -71,10 +83,10 @@ import { ref } from 'vue';
             @alert-text="alertmsg"
           />
         </div>
-      </div>
+      </div> -->
 
       <!-- Component v-model -->
-      <div>
+      <!-- <div>
         <h2>Component v-model</h2>
         <p>Model message is: {{ modelMsg }}</p>
         <p>My Component Title is: {{ compT }}</p>
@@ -88,6 +100,40 @@ import { ref } from 'vue';
           v-model:model-message="modelMsgs"
           v-model:comp-title="compTitles"
         />
+      </div> -->
+
+      <!-- Slots -->
+      <div>
+        <h2>Slots</h2>
+        <div>
+          <p>Fancy message is: {{ fancyMessage }}</p>
+          <FancyButton>
+            {{ fancyMessage }}
+            <IconSupport />
+          </FancyButton>
+        </div>
+
+        <div>
+          <BaseLayout>
+            <template v-slot:header>
+              <h3>Here might be a page title</h3>
+            </template>
+            <template #default>
+              <p>A paragraph for the main content.</p>
+              <p>And another one.</p>
+            </template>
+            <template #footer>
+              Footer: Here's some contact info
+            </template>
+          </BaseLayout>
+        </div>
+
+        <div>
+          <MouseTracker v-slot="{ x, y }">
+            Mouse is at: {{ x }}, {{ y }}
+          </MouseTracker>
+        </div>
+
       </div>
     </div>
   </div>

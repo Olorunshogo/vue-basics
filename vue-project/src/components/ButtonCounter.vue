@@ -17,8 +17,10 @@
 
 <template>
   <div>
-    <span>Count by {{ counterArg }}: &NonBreakingSpace;</span>
-    <button @click="increment">You clicked me {{ count }} times.</button>
+    <span>Count by {{ counterArg }}: &NonBreakingSpace;</span> <span>You clicked me {{ count }} times.</span>
+    <button @click="increment">
+      <slot>Slot</slot>
+    </button>
   </div>
 </template>
 
