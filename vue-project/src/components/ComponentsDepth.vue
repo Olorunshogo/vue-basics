@@ -15,6 +15,7 @@ import { ref } from 'vue';
     title: string;
     likes?: number;
     author: Author;
+    buttontext: string;
   }
 
   interface Author {
@@ -27,15 +28,24 @@ import { ref } from 'vue';
       id: 1,
       title: 'First BlogPost title',
       likes: 22,
-      author: { name: 'Veronica', company: 'Veridian Dynamics' }
+      author: { name: 'Veronica', company: 'Veridian Dynamics' },
+      buttontext: 'Alert 1',
     },
     {
       id: 2,
       title: 'Second BlogPost title',
       likes: 38,
-      author: { name: 'John', company: 'Tech Corp' }
+      author: { name: 'John', company: 'Tech Corp' },
+      buttontext: 'Alert 2'
      }
   ]);
+
+  function alertmsg() {
+    alert('This button is working');
+  }
+
+  
+
 </script>
 
 <template>
@@ -50,10 +60,16 @@ import { ref } from 'vue';
         <div v-for="post in posts" :key="post.id">
           <BlogPost
             :title="post.title" :likes="post.likes"
-            :author="post.author"
+            :author="post.author" :buttontext="post.buttontext"
+            @alert-text="alertmsg"
           />
         </div>
       </div>
+
+      <!-- Event Handling -->
+       <div>
+          <h2>Event Handling</h2>
+       </div>
     </div>
   </div>
 </template>

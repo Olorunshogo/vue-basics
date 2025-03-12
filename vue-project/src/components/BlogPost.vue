@@ -6,9 +6,10 @@
     author: {
       name: String,
       company: String
-    }
+    },
+    buttontext: string
   }>();
-  defineEmits(['enlarge-text']);
+  const emit = defineEmits([ 'enlarge-text', 'alert-text' ]);
 </script>
 
 <template>
@@ -19,7 +20,8 @@
       <span>{{ author.name }}</span>&NonBreakingSpace;
       <span>{{ author.company }}</span>
     </p>
-    <button @click="$emit('enlarge-text')">Enlarge text</button>
+    <!-- <button @click="$emit('enlarge-text')">{{ buttontext }}</button> -->
+     <button @click="$emit('alert-text')">{{ buttontext }}</button>
   </div>
 </template>
 

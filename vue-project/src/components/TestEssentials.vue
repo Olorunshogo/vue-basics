@@ -143,6 +143,23 @@
     console.log(`the component is now mounted.`);
   });
 
+  const emit = defineEmits({
+    click: null,
+
+    submit: ({ email, password }) => {
+      if (email && password) {
+        return true;
+      } else {
+        console.warn('invalid submit event payload')
+        return true;
+      }
+    }
+  });
+
+  function submitForm(email: string, password: string) {
+    emit('submit', { email, password })
+  }
+
 </script>
 
 <template>
