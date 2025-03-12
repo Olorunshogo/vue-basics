@@ -1,6 +1,8 @@
 
 <script lang="ts" setup>
-  import { ref, provide } from 'vue';
+  import { ref, provide, defineAsyncComponent, type HydrationStrategy } from 'vue';
+import LoadingComponent from './LoadingComponent.vue';
+import ErrorComponent from './ErrorComponent.vue';
 
   // Props Declaration
   const props = defineProps<{
@@ -54,16 +56,30 @@
 
   // SLot
   const fancyMessage = ref<string>('Click Me!');
-  // const slotProps = ref<{ text: string, count: number}>({
-  //   text: '',
-  //   count: 0
-  // })
 
   // Provide / Inject
   const messages = ref<string>('Hello');
   provide('messages', messages);
   const provideCount = ref<number>(0);
-  provide('key', provideCount)
+  provide('key', provideCount);
+
+  // Async Components
+  const myStrategy: HydrationStrategy = (hydrate, forEachElement) => {
+    // forEachElement is a helper to iterate through all the root elements
+    // in the component's non-hydrated DOM, since the root can be a fragment
+    // instead of a single element
+    forEachElement(el => {})
+    // call `hydrate` when ready
+    hydrate()
+    return () => {
+      // return a teardown function if needed
+    }
+  }
+
+  const AsyncComp = defineAsyncComponent({
+    loader: () => import('./MouseTracker.vue'),
+    hydrate: myStrategy
+  })
 
 
 
@@ -105,7 +121,7 @@
       </div> -->
 
       <!-- Slots -->
-      <!-- <div>
+      <div>
         <h2>Slots</h2>
         <div>
           <p>Fancy message is: {{ fancyMessage }}</p>
@@ -136,16 +152,23 @@
           </MouseTracker>
         </div>
 
-      </div> -->
+      </div>
 
       <!-- Provide / Inject  -->
       <div>
+        <h2>Slots</h2>
         <MyComponent />
         <label for="provide">
           <input v-model="messages" type="text" name="provide" id="provide">
         </label>
       </div>
 
+      <!-- Async Components -->
+      <div>
+        <h2>Async Components</h2>
+        <MouseTracker />
+
+      </div>
 
     </div>
   </div>

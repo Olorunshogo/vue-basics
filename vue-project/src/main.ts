@@ -1,6 +1,6 @@
 import './assets/css/main.css'
 
-import { createApp } from 'vue'
+import { createApp, defineAsyncComponent } from 'vue'
 import { createPinia } from 'pinia'
 
 import App from './App.vue'
@@ -21,6 +21,8 @@ import IconTooling from './components/icons/IconTooling.vue'
 import BaseLayout from './components/BaseLayout.vue'
 import MouseTracker from './components/MouseTracker.vue'
 import ProvideInject from './components/ProvideInject.vue'
+import LoadingComponent from './components/LoadingComponent.vue'
+import ErrorComponent from './components/ErrorComponent.vue'
 
 const app = createApp(App)
 
@@ -35,6 +37,13 @@ app
   .component('MyComponent', MyComponent)
   .component('ProvideInject', ProvideInject)
   .component('TodoItem',TodoItem)
+  .component('LoadingComponent', LoadingComponent)
+  .component('ErrorComponent', ErrorComponent)
+
+  // Async Component
+  .component('MouseTracker', defineAsyncComponent(() =>
+    import('./components/MouseTracker.vue')
+  ))
 
   // Views
   .component('TestEssentials', TestEssentials)
