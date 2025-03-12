@@ -1,9 +1,7 @@
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import IconDocumentation from './icons/IconDocumentation.vue';
-import IconEcosystem from './icons/IconEcosystem.vue';
-import IconSupport from './icons/IconSupport.vue';
+  import { ref, provide } from 'vue';
+
   // Props Declaration
   const props = defineProps<{
     title?: String,
@@ -60,9 +58,13 @@ import IconSupport from './icons/IconSupport.vue';
   //   text: '',
   //   count: 0
   // })
-  const slotItems = ref([
-    { id: 1, item: 'Item 1' }
-  ])
+
+  // Provide / Inject
+  const messages = ref<string>('Hello');
+  provide('messages', messages);
+  const provideCount = ref<number>(0);
+  provide('key', provideCount)
+
 
 
 </script>
@@ -103,7 +105,7 @@ import IconSupport from './icons/IconSupport.vue';
       </div> -->
 
       <!-- Slots -->
-      <div>
+      <!-- <div>
         <h2>Slots</h2>
         <div>
           <p>Fancy message is: {{ fancyMessage }}</p>
@@ -134,7 +136,17 @@ import IconSupport from './icons/IconSupport.vue';
           </MouseTracker>
         </div>
 
+      </div> -->
+
+      <!-- Provide / Inject  -->
+      <div>
+        <MyComponent />
+        <label for="provide">
+          <input v-model="messages" type="text" name="provide" id="provide">
+        </label>
       </div>
+
+
     </div>
   </div>
 </template>
@@ -165,5 +177,12 @@ import IconSupport from './icons/IconSupport.vue';
     flex-direction: flex;
     flex-wrap: wrap;
     gap: 1rem;
+  }
+
+  input {
+    border: 1px solid grey;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin: 0.5rem 0;
   }
 </style>

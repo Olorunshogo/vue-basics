@@ -20,6 +20,7 @@ import IconSupport from './components/icons/IconSupport.vue'
 import IconTooling from './components/icons/IconTooling.vue'
 import BaseLayout from './components/BaseLayout.vue'
 import MouseTracker from './components/MouseTracker.vue'
+import ProvideInject from './components/ProvideInject.vue'
 
 const app = createApp(App)
 
@@ -32,6 +33,7 @@ app
   .component('FancyButton', FancyButton)
   .component('MouseTracker', MouseTracker)
   .component('MyComponent', MyComponent)
+  .component('ProvideInject', ProvideInject)
   .component('TodoItem',TodoItem)
 
   // Views

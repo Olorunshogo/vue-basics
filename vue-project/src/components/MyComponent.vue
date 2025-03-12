@@ -1,9 +1,14 @@
 
 <script lang="ts" setup>
+  import { inject } from 'vue';
+
   // Component v-model
   // const modelMessage = defineModel('modelMessage');
   const modelMessage = defineModel('modelMessage');
   const compTitle = defineModel('compTitle');
+
+  // Provide / Inject
+  const grandchildMessage = inject('granchildMsg');
 </script>
 
 <template>
@@ -18,6 +23,11 @@
       <label for="title">
         <input v-model="compTitle" type="text" name="title" id="title">
       </label>
+    </div>
+
+    <div>
+      <!-- Provide / Inject -->
+       <ProvideInject />
     </div>
   </div>
 </template>
