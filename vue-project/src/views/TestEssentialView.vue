@@ -1,12 +1,12 @@
 
 <script lang="ts" setup>
-  import TestEssential from "../components/TestEssential.vue";
+  // import TestEssentials from "../components/TestEssentials.vue";
 </script>
 
 <template>
   <div>
     <div>
-      <TestEssential />
+      <TestEssentials />
     </div>
   </div>
 </template>

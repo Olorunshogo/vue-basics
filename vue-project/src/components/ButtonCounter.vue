@@ -2,10 +2,6 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
 
-  // export default {
-  //   name: 'ButtonCounter',
-  // }
-
   const props = defineProps({
     counterArg: {
       type: Number,
