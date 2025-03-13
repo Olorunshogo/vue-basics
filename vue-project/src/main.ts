@@ -23,6 +23,8 @@ import MouseTracker from './components/MouseTracker.vue'
 import ProvideInject from './components/ProvideInject.vue'
 import LoadingComponent from './components/LoadingComponent.vue'
 import ErrorComponent from './components/ErrorComponent.vue'
+import TestReusability from './views/TestReusability.vue'
+import CompReusability from './components/CompReusability.vue'
 
 const app = createApp(App)
 
@@ -33,12 +35,13 @@ app
   .component('BlogPost', BlogPost)
   .component('ButtonCounter', ButtonCounter)
   .component('FancyButton', FancyButton)
-  .component('MouseTracker', MouseTracker)
+  // .component('MouseTracker', MouseTracker)
   .component('MyComponent', MyComponent)
   .component('ProvideInject', ProvideInject)
   .component('TodoItem',TodoItem)
   .component('LoadingComponent', LoadingComponent)
   .component('ErrorComponent', ErrorComponent)
+  .component('CompReusability',CompReusability)
 
   // Async Component
   .component('MouseTracker', defineAsyncComponent(() =>
@@ -48,6 +51,7 @@ app
   // Views
   .component('TestEssentials', TestEssentials)
   .component('ComponentsDepth', ComponentsDepth)
+  .component('TestReusability', TestReusability)
 
   // Icons
   .component('IconCommunity', IconCommunity)

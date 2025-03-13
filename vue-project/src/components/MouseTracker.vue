@@ -1,22 +1,17 @@
 
 <script lang="ts" setup>
-  import { ref, onMounted, onUnmounted } from 'vue';
+  // import { useMouse } from '../composables/mouse';
+  import { useMouse } from '../composables/mouse';
 
-  const x = ref<number>(0);
-  const y = ref<number>(0);
-
-  const update = (e: MouseEvent) => {
-    x.value = e.pageX;
-    y.value = e.pageY;
-  }
-
-  onMounted(() => window.addEventListener('mouseover', update))
-  onUnmounted(() => window.addEventListener('mousemove', update))
+  const { x, y } = useMouse();
 </script>
 
 <template>
   <div>
-    <slot :x="x" :y="y"></slot>
+    <p><span>Mouse position is at: </span>
+      <!-- <span><slot :x="x" :y="y"></slot></span> -->
+      <span>{{ x }}, {{ y }}</span>
+    </p>
   </div>
 </template>
 

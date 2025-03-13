@@ -16,6 +16,7 @@ import { RouterLink, RouterView } from 'vue-router'
           <RouterLink to="/about" target="_blank">About</RouterLink>
           <RouterLink to="/testessential" target="_blank">Test Essentials</RouterLink>
           <RouterLink to="/componentdepth" target="_blank">Components In-Depth</RouterLink>
+          <RouterLink to="/testreusability" target="_blank">Test Reusability</RouterLink>
         </nav>
       </div>
     </header>

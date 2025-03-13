@@ -27,6 +27,11 @@ const router = createRouter({
       name: 'componentdepth',
       component: () => import('../views/TestCompsView.vue'),
     },
+    {
+      path: '/testreusability',
+      name: 'testreusability',
+      component:() => import('../views/TestReusability.vue'),
+    },
   ],
 })
 

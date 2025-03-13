@@ -1,14 +1,16 @@
 
 <script lang="ts" setup>
-  
+
 </script>
 
 <template>
   <div>
-    <ComponentDepth />
+    <CompReusability />
   </div>
 </template>
 
-<style scoped>
+
+
+<style>
 
 </style>
