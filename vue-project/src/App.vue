@@ -4,7 +4,7 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div class="relative grid grid-cols-1 lg:flex w-screen">
+  <div class="relative grid grid-cols-1 lg:flex w-screen h-dvh">
     <header class="border-2 border-slate-700 shadow-2xl flex flex-col lg:flex-col justify-between items-center lg:justify-start lg:h-dvh p-4 lg:p-8">
       <div class="flex mx-auto mb-8">
         <img alt="Vue logo" class="block" src="@/assets/logo.svg" width="125" height="125" />

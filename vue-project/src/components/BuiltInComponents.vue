@@ -1,7 +1,14 @@
 
-<script lang="ts" setup>
-  import { ref, shallowRef } from 'vue';
 
+<!--
+  FLIP list transitions with the built-in <TransitionGroup>.
+  https://aerotwist.com/blog/flip-your-animations/
+-->
+
+<script lang="ts" setup>
+  import { ref, shallowRef, computed } from 'vue';
+
+  // Transition
   import AlertBox from './AlertBox.vue';
   import ErrorComponent from './ErrorComponent.vue';
 
@@ -17,7 +24,82 @@
   const transitionCount = ref<number>(0);
   setInterval(() => {
     transitionCount.value+=2;
-  }, 1000)
+  }, 1000);
+
+  // Transition Group
+  import { shuffle as _shuffle } from 'lodash-es';
+
+  const getInitialItems = ():number[] => [1, 2, 3, 4, 5];
+  const items = ref<number[]>(getInitialItems());
+  let id: number = items.value.length + 1;
+
+  function add(): void {
+    const i: number = Math.floor(Math.random() * items.value.length)
+    items.value.splice(i, 0, id++)
+  }
+
+  function reset(): void {
+    items.value = getInitialItems();
+    id = items.value.length + 1;
+  }
+
+  function shuffle() {
+    items.value = _shuffle(items.value);
+  }
+
+  function remove(item: number): void {
+    const i = items.value.indexOf(item);
+    if (i > -1) {
+      items.value.splice(i, 1)
+    }
+  }
+
+  // GSAP query
+  import gsap from 'gsap';
+
+  interface ActorList {
+    actorName: string;
+  }
+
+  const actorList: ActorList[] = [
+    { actorName: 'Bruce Lee' },
+    { actorName: 'Jackie Chan' },
+    { actorName: 'Chuck Norris' },
+    { actorName: 'Jet Li' },
+    { actorName: 'Kung Fury' }
+  ];
+
+  const query = ref<string>('');
+
+  const computedList = computed<ActorList[]>(() => {
+    return actorList.filter((actor) =>
+      actor.actorName.toLowerCase().includes(query.value));
+    // return actorList.filter((actor) =>
+    //   actor.actorName.includes(query.value));
+  });
+
+  function onBeforeEnter(el: Element): void {
+    (el as HTMLElement).style.opacity = '0';
+  }
+
+  function onEnter(el: Element, done: () => void): void {
+    gsap.to(el, {
+      opacity: 1,
+      height: '1.6em',
+      delay: parseFloat(el.getAttribute('data-index') || '0') * 0.15,
+      onComplete: done
+    })
+  }
+
+  function onLeave(el: Element, done: () => void): void {
+    gsap.to(el, {
+      opacity: 0,
+      height: 0,
+      delay: parseFloat(el.getAttribute('data-index') || '0') * 0.15,
+      onComplete: done
+    })
+  }
+
 </script>
 
 <template>
@@ -30,6 +112,7 @@
         <h2 class="text-center font-semibold my-2 text-xl">Transition</h2>
 
         <div class="flex gap-4 flex-wrap">
+          <!-- Toggle Fade -->
           <div>
             <button class="transition-btn" @click="fade = !fade">Toggle fade</button>
             <Transition name="fade">
@@ -37,6 +120,7 @@
             </Transition>
           </div>
 
+          <!-- Toggle Slide + Fade -->
           <div>
             <button class="transition-btn" @click="slow = !slow">Toggle Slide + Fade</button>
             <Transition name="slide-fade">
@@ -44,13 +128,15 @@
             </Transition>
           </div>
 
+          <!-- Toggle Bouncy text -->
           <div>
-            <button class="transition-btn text-center" @click="bounce = !bounce">Toggle Slide + Fade</button>
+            <button class="transition-btn text-center" @click="bounce = !bounce">Bounce Text</button>
             <Transition name="bounce">
               <p v-show="bounce">Here is some bouncy text</p>
             </Transition>
           </div>
 
+          <!-- Toggle Animate CSS -->
           <div>
             <button class="transition-btn text-center" @click="animatecss = !animatecss">Animate.css </button>
             <Transition
@@ -98,15 +184,62 @@
 
           <!-- Dynamic transitions -->
           <div>
-            <Transition name="fade" mode="in-out">
+            <Transition name="fade" mode="out-in">
               <span :key="transitionCount">{{ transitionCount }}</span>
             </Transition>
           </div>
 
         </div>
-
-
       </div>
+
+      <!-- Transition Group -->
+      <div>
+        <h2 class="text-center font-semibold text-2xl">Transition Group</h2>
+
+        <div class="grid gap-4 flex-wrap mt-2">
+          <div class="gap-8 flex items-center">
+            <button class="transition-btn" @click="add">Add</button>
+            <button class="transition-btn" @click="reset">Reset</button>
+            <button class="transition-btn" @click="shuffle">Shuffle</button>
+          </div>
+
+          <div>
+            <TransitionGroup tag="ul" name="group-fade" class="relative p-0 max-w-4/5 mx-auto">
+              <ul class="flex justify-between items-center">
+                <li v-for="item in items" class="flex items-center my-2 gap-4 w-full lg:w-4/5 mx-auto h-8 bg-black/40 shadow-2xl rounded-sm box-border" :key="item">
+                  <span>{{ item }} &NonBreakingSpace;</span>
+                  <span><button class="transition-btn" @click="remove(item)">x</button></span>
+                </li>
+              </ul>
+            </TransitionGroup>
+          </div>
+        </div>
+
+        <div class="grid gap-4 mt-2">
+          <label for="query" class="flex items-center h-12 border-1 w-60 mt-2 rounded-md cursor-default focus:cursor-pointer py2 px-4">
+            <input
+              type="text" name="query" id="query" v-model="query"
+              class="border-none my-2 outline-none"
+            />
+          </label>
+
+          <TransitionGroup
+            tag="ul" :css="false" name="list"
+            @before-enter="onBeforeEnter"
+            @enter="onEnter" @leave="onLeave"
+          >
+            <ul>
+              <li
+                v-for="(actor, index) in computedList"
+                :key="actor.actorName" :data-index="index"
+              >
+                {{ actor.actorName }}
+              </li>
+            </ul>
+          </TransitionGroup>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -114,6 +247,7 @@
 
 
 <style lang="css" scoped>
+  /* Transition  */
   /* Fade */
   .fade-enter-active,
   .fade-leave-active {
@@ -167,5 +301,33 @@
   .nested-leave-to .inner {
     transform: translate(30px);
     opacity: 0;
+  }
+
+  /* Transition Group */
+  /* Group-Fade */
+  /* 1. declare transition */
+  .group-fade-move,
+  .group-fade-enter-active,
+  .group-fade-leave-active,
+  .list-move,
+  .list-enter-active,
+  .list-leave-active {
+    transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  }
+
+  /* 2. declare enter from and leave to state */
+  .group-fade-enter-from,
+  .group-fade-leave-to,
+  .list-enter-from,
+  .list-leave-to {
+    opacity: 0;
+    transform: scaleY(0.01) translate(30px, 0);
+  }
+
+  /* 3. ensure leaving items are taken out of layout flow so that moving
+  animations can be calculated correctly. */
+
+  .group-fade-leave-active {
+    position: absolute;
   }
 </style>
