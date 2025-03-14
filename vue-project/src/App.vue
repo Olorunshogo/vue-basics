@@ -4,87 +4,35 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div>
-    <header>
-      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div class="relative grid grid-cols-1 lg:flex w-screen">
+    <header class="border-2 border-slate-700 shadow-2xl flex flex-col lg:flex-col justify-between items-center lg:justify-start lg:h-dvh p-4 lg:p-8">
+      <div class="flex mx-auto mb-8">
+        <img alt="Vue logo" class="block" src="@/assets/logo.svg" width="125" height="125" />
+      </div>
 
-      <div class="wrapper">
+      <div class="p-2 lg:p-4">
         <!-- <HelloWorld msg="You did it!" /> -->
 
-        <nav>
-          <RouterLink to="/">Home</RouterLink>
+        <nav class="flex items-center *:text-green-600 *:hover:border-transparent *:inline-block lg:text-left -ml-4 lg:flex-col *:lg:pb-4 *:text-sm *:lg:text-base lg:py-4 lg:mt-4 *:px-2 *:lg:px-4 *:text-center *:border-l-2 *:mx-auto *:active:text-gray-700 *:hover:outline-none">
+          <RouterLink to="/" class="border-none">Home</RouterLink>
           <RouterLink to="/about" target="_blank">About</RouterLink>
           <RouterLink to="/testessential" target="_blank">Test Essentials</RouterLink>
           <RouterLink to="/componentdepth" target="_blank">Components In-Depth</RouterLink>
           <RouterLink to="/testreusability" target="_blank">Test Reusability</RouterLink>
+          <RouterLink to="/testbuiltin" target="_blank">Test BuiltIn</RouterLink>
         </nav>
       </div>
     </header>
 
-    <RouterView></RouterView>
+
+    <div class="p-4 lg:p-8 h-dvh w-5/5">
+      <RouterView></RouterView>
+    </div>
   </div>
 </template>
 
 <style scoped>
-  header {
-    line-height: 1.5;
-    max-height: 100vh;
-  }
 
-  .logo {
-    display: block;
-    margin: 0 auto 2rem;
-  }
 
-  nav {
-    width: 100%;
-    font-size: 12px;
-    text-align: center;
-    margin-top: 2rem;
-  }
 
-  nav a.router-link-exact-active {
-    color: var(--color-text);
-  }
-
-  nav a.router-link-exact-active:hover {
-    background-color: transparent;
-  }
-
-  nav a {
-    display: inline-block;
-    padding: 0 1rem;
-    border-left: 1px solid var(--color-border);
-  }
-
-  nav a:first-of-type {
-    border: 0;
-  }
-
-  @media (min-width: 1024px) {
-    header {
-      display: flex;
-      place-items: center;
-      padding-right: calc(var(--section-gap) / 2);
-    }
-
-    .logo {
-      margin: 0 2rem 0 0;
-    }
-
-    header .wrapper {
-      display: flex;
-      place-items: flex-start;
-      flex-wrap: wrap;
-    }
-
-    nav {
-      text-align: left;
-      margin-left: -1rem;
-      font-size: 1rem;
-
-      padding: 1rem 0;
-      margin-top: 1rem;
-    }
-  }
 </style>

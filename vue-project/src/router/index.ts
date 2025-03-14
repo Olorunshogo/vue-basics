@@ -32,6 +32,11 @@ const router = createRouter({
       name: 'testreusability',
       component:() => import('../views/TestReusability.vue'),
     },
+    {
+      path: '/testbuiltin',
+      name: 'testbuiltin',
+      component:() => import('../views/TestBuiltIn.vue')
+    },
   ],
 })
 

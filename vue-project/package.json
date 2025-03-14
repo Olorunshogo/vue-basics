@@ -15,7 +15,7 @@
     "lint:eslint": "eslint . --fix",
     "lint": "run-s lint:*",
     "format": "prettier --write src/",
-    "tailwindcss": "npx @tailwindcss/cli -i ./src/assets/css/input.css -o ./dist/css/output.css --watch"
+    "tailwindcss": "npx @tailwindcss/cli -i ./src/assets/css/input.css -o ./src/assets/css/output.css --watch"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.0.12",

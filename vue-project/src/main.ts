@@ -1,6 +1,5 @@
-import './assets/css/main.css'
 
-import { createApp, defineAsyncComponent } from 'vue'
+import { createApp, defineAsyncComponent, onMounted } from 'vue'
 import { createPinia } from 'pinia'
 
 import App from './App.vue'
@@ -25,6 +24,8 @@ import LoadingComponent from './components/LoadingComponent.vue'
 import ErrorComponent from './components/ErrorComponent.vue'
 import TestReusability from './views/TestReusability.vue'
 import CompReusability from './components/CompReusability.vue'
+import BuiltInComponents from './components/BuiltInComponents.vue'
+import MyTransition from './components/MyTransition.vue'
 
 const app = createApp(App)
 
@@ -33,10 +34,12 @@ app
   .component('AlertBox', AlertBox)
   .component('BaseLayout', BaseLayout)
   .component('BlogPost', BlogPost)
+  .component('BuiltInComponents', BuiltInComponents)
   .component('ButtonCounter', ButtonCounter)
   .component('FancyButton', FancyButton)
   // .component('MouseTracker', MouseTracker)
   .component('MyComponent', MyComponent)
+  .component('MyTransition', MyTransition)
   .component('ProvideInject', ProvideInject)
   .component('TodoItem',TodoItem)
   .component('LoadingComponent', LoadingComponent)
@@ -59,6 +62,7 @@ app
   .component('IconEcosystem', IconEcosystem)
   .component('IconSupport', IconSupport)
   .component('IconTooling', IconTooling)
+
 
 app.use(createPinia())
 app.use(router)
