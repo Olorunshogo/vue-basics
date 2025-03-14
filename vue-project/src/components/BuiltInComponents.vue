@@ -6,7 +6,7 @@
 -->
 
 <script lang="ts" setup>
-  import { ref, shallowRef, computed } from 'vue';
+  import { ref, shallowRef, computed, onActivated, onDeactivated } from 'vue';
 
   // Transition
   import AlertBox from './AlertBox.vue';
@@ -100,6 +100,22 @@
     })
   }
 
+  // KeepAlive
+  const keepActiveComponent = shallowRef(AlertBox);
+
+  // Simulating some component change
+  setTimeout(() => {
+    keepActiveComponent.value = AlertBox;
+  }, 5000)
+
+  onActivated(() => {
+    console.log('Component has been activated');
+  });
+
+  onDeactivated(() => {
+    console.log('Component has been deactivated');
+  })
+
 </script>
 
 <template>
@@ -165,6 +181,7 @@
             <MyTransition />
           </div>
 
+          <!-- isActiveComponent -->
           <div>
             <div class="flex items-center gap-8">
               <label for="alertBox">
@@ -237,6 +254,35 @@
               </li>
             </ul>
           </TransitionGroup>
+        </div>
+      </div>
+
+      <!-- KeepAlive -->
+      <div>
+        <div>
+          <div class="flex items-center gap-8">
+            <label for="alertBox">
+              <input type="radio" name="alertBox" id="alertBox" v-model="keepActiveComponent" :value="AlertBox">
+              AlertBox
+            </label>
+
+            <label for="mouseTracker">
+              <input type="radio" name="errorComponent" id="errorComponent" v-model="keepActiveComponent" :value="ErrorComponent">
+              Error Component
+            </label>
+          </div>
+
+          <div>
+            <div v-if="keepActiveComponent === AlertBox">The current component is: AlertBox</div>
+            <div v-if="keepActiveComponent === ErrorComponent">The current component is: Error Component</div>
+          </div>
+
+          <!-- Transition Between Components -->
+          <KeepAlive :max="10">
+            <Transition name="fade" mode="out-in">
+              <component :is="keepActiveComponent"></component>
+            </Transition>
+          </KeepAlive>
         </div>
       </div>
 
