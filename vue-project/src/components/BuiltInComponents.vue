@@ -116,6 +116,8 @@
     console.log('Component has been deactivated');
   })
 
+  const showModal = ref<boolean>(false);
+
 </script>
 
 <template>
@@ -259,32 +261,59 @@
 
       <!-- KeepAlive -->
       <div>
+        <h2 class="text-center font-semibold text-2xl">KeepAlive</h2>
+
+        <div class="flex items-center gap-8">
+          <label for="alertBox">
+            <input type="radio" name="alertBox" id="alertBox" v-model="keepActiveComponent" :value="AlertBox">
+            AlertBox
+          </label>
+
+          <label for="mouseTracker">
+            <input type="radio" name="errorComponent" id="errorComponent" v-model="keepActiveComponent" :value="ErrorComponent">
+            Error Component
+          </label>
+        </div>
+
         <div>
-          <div class="flex items-center gap-8">
-            <label for="alertBox">
-              <input type="radio" name="alertBox" id="alertBox" v-model="keepActiveComponent" :value="AlertBox">
-              AlertBox
-            </label>
+          <div v-if="keepActiveComponent === AlertBox">The current component is: AlertBox</div>
+          <div v-if="keepActiveComponent === ErrorComponent">The current component is: Error Component</div>
+        </div>
 
-            <label for="mouseTracker">
-              <input type="radio" name="errorComponent" id="errorComponent" v-model="keepActiveComponent" :value="ErrorComponent">
-              Error Component
-            </label>
-          </div>
+        <!-- Transition Between Components -->
+        <KeepAlive :max="10">
+          <Transition name="fade" mode="out-in">
+            <component :is="keepActiveComponent"></component>
+          </Transition>
+        </KeepAlive>
+      </div>
 
-          <div>
-            <div v-if="keepActiveComponent === AlertBox">The current component is: AlertBox</div>
-            <div v-if="keepActiveComponent === ErrorComponent">The current component is: Error Component</div>
-          </div>
+      <!-- Teleport -->
+      <div>
+        <h2 class="text-center font-semibold text-2xl">Teleport</h2>
 
-          <!-- Transition Between Components -->
-          <KeepAlive :max="10">
-            <Transition name="fade" mode="out-in">
-              <component :is="keepActiveComponent"></component>
-            </Transition>
-          </KeepAlive>
+        <div>
+          <button @click="showModal = true" class="transition-btn">Show Modal</button>
+
+          <Teleport to="body">
+            <MyModal :showModal="showModal" @close="showModal = false">
+              <template #header>
+                <h3>Custom header</h3>
+              </template>
+
+              <template #body>
+                <p>Custom Body</p>
+                <p>Body content again.</p>
+              </template>
+
+              <template #footer>
+                <p>Custom Footer</p>
+              </template>
+            </MyModal>
+          </Teleport>
         </div>
       </div>
+
 
     </div>
   </div>

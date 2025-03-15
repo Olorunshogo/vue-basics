@@ -26,6 +26,7 @@ import TestReusability from './views/TestReusability.vue'
 import CompReusability from './components/CompReusability.vue'
 import BuiltInComponents from './components/BuiltInComponents.vue'
 import MyTransition from './components/MyTransition.vue'
+import MyModal from './components/MyModal.vue'
 
 const app = createApp(App)
 
@@ -39,6 +40,7 @@ app
   .component('FancyButton', FancyButton)
   // .component('MouseTracker', MouseTracker)
   .component('MyComponent', MyComponent)
+  .component('MyModal', MyModal)
   .component('MyTransition', MyTransition)
   .component('ProvideInject', ProvideInject)
   .component('TodoItem',TodoItem)
