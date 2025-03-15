@@ -116,7 +116,10 @@
     console.log('Component has been deactivated');
   })
 
+  // Teleport
   const showModal = ref<boolean>(false);
+
+  // Suspense
 
 </script>
 

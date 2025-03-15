@@ -1,46 +1,17 @@
 
 <script lang="ts" setup>
   import { ref, reactive, computed, defineProps, watch, useTemplateRef, onMounted } from 'vue';
-  // import TodoItem from './TodoItem.vue';
-  // import { ButtonCounter } from './ButtonCounter.vue'
-  // import { BlogPost } from './BlogPost.vue';
-  // import { AlertBox } from './AlertBox.vue';
+  import { store } from '../stores/store';
 
-  // Template Syntax, Class & Style Bindings
-  const title = ref<string>('Attribute Binding');
-  const isRed = ref<boolean>(true);
   const color = ref<string>('green');
-  const isButtonDisabled = ref<boolean>(false);
-  const googleLink = ref<string>('https://google.com/');
-  function toggleRed() {
-    isRed.value = !isRed.value;
-  }
-  function toggleColor() {
-    color.value = color.value === 'green' ? 'blue' : 'red';
-  }
-  const isActive = ref(true);
-  function toggleActive() {
-    isActive.value = !isActive.value
-  }
-  // const activeColor = ref('red');
-  // const fontSize = ref(20);
+
   const styleObject = ref({
     color: 'red',
     fontSize: '30px'
   })
 
-
-  // Computed Properties
-  const author = reactive({
-    name: 'John Author',
-    books: [
-      'Vue 2 - Advanced Guide',
-      'Vue 3 - Basic Guide',
-      'Vue 4 - The Mystery'
-    ]
-  });
   const publishedBooksMessage = computed(() => {
-    return author.books.length > 0 ? 'Yes' : 'No';
+    return store.author.books.length > 0 ? 'Yes' : 'No';
   });
   const firstName = ref<string>('John');
   const lastName = ref<string>('Author');
@@ -91,18 +62,8 @@
   //     alert(warning)
   //   }
 
-  // Form Handling
-  const textInput = ref('');
-  const textareaInput = ref('');
-  const checkedNames = ref([]);
-  const radioPicked = ref([]);
-  const selectedInput = ref([]);
-  const options = ref([
-    { value: "A" }, { value: "B" },
-    { value: "C" }, { value: "D" },
-  ]);
 
-//   // Watchers
+  // Watchers
   const questionWatchers = ref('');
   const answerWatchers = ref('Questions usually contain a question mark. ;-)');
   const loadingWatchers = ref(false);
@@ -130,16 +91,16 @@
 //   })
 
   // Component Basics
-  const posts = ref([
-    { id: 1, title: 'My journey with Vue' },
-    { id: 2, title: 'Blogging with Vue' },
-    { id: 3, title: 'Why Vue is so fun' }
-  ])
-  const postFontSize = ref(1);
+  // const posts = ref([
+  //   { id: 1, title: 'My journey with Vue' },
+  //   { id: 2, title: 'Blogging with Vue' },
+  //   { id: 3, title: 'Why Vue is so fun' }
+  // ])
+  // const postFontSize = ref(1);
 
   // Lifecycle Hooks
   onMounted(() => {
-    alert('This component is now mounted and there should be an alert.');
+    // alert('This component is now mounted and there should be an alert.');
     console.log(`the component is now mounted.`);
   });
 
@@ -170,22 +131,22 @@
     <div>
       <h2>Template Syntax</h2>
       <p>
-        <span :title="title">Hover over this paragraph to see the dynamically bound title!</span>
+        <span :title="store.title">Hover over this paragraph to see the dynamically bound title!</span>
       </p>
 
-      <p :class="{ red: isRed }" @click="toggleRed">
+      <p :class="{ red: store.isRed }" @click="store.isRed = false">
         This should be red...but click to toggle the color.
       </p>
 
-      <p v-if="isRed" :class="{ color }" @click="toggleColor">
+      <p v-if="store.isRed" :class="{ color }" @click="store.isRed = false">
         This should be green, and should toggle between red and blue on click.
-        <a :href="googleLink" target="_blank">Google</a>
+        <a :href="store.googleLink" target="_blank">Google</a>
       </p>
-      <p :class="{ active: isActive }" @click="toggleActive">Active or not - Click to toggle color</p>
+      <p :class="{ active: store.isActive }" @click="store.isActive = false">Active or not - Click to toggle color</p>
       <!-- <p :style="{ color: activeColor, fontSize: fontSize + 'px' }">Active Color and Font Size</p> -->
       <p :style="styleObject">Active Color and Font Size</p>
 
-      <button :disabled="isButtonDisabled" @click="isButtonDisabled = !isButtonDisabled">Button</button>
+      <button :disabled="store.isButtonDisabled" @click="store.isButtonDisabled = !store.isButtonDisabled">Button</button>
       <!-- <form action="" @submit.prevent="onSubmit"></form> -->
     </div>
 
@@ -248,53 +209,53 @@
     <div>
       <h2>Form Handling</h2>
       <div>
-        <p>Text message is: {{ textInput }}</p>
+        <p>Text message is: {{ store.textInput }}</p>
         <label for="text">
-          <input v-model="textInput" ref="text-input" type="text" name="text" id="text" >
+          <input v-model="store.textInput" ref="text-input" type="text" name="text" id="text" >
         </label>
       </div>
 
       <div>
-        <p>Textarea message is: <span style="white-space: pre-line;">{{ textareaInput }}</span></p>
+        <p>Textarea message is: <span style="white-space: pre-line;">{{ store.textareaInput }}</span></p>
         <label for="textarea">
-          <textarea v-model="textareaInput" name="textarea" id="textarea" cols="30" rows="3" placeholder="add multiple lines"></textarea>
+          <textarea v-model="store.textareaInput" name="textarea" id="textarea" cols="30" rows="3" placeholder="add multiple lines"></textarea>
         </label>
       </div>
 
       <div>
-        <p>Checked names: {{ checkedNames }}</p>
+        <p>Checked names: {{ store.checkedNames }}</p>
         <label for="jack">
-          <input v-model="checkedNames" value="Jack" type="checkbox" name="jack" id="jack"> &NonBreakingSpace;
+          <input v-model="store.checkedNames" value="Jack" type="checkbox" name="jack" id="jack"> &NonBreakingSpace;
           Jack
         </label>
         <label for="john">
-          <input v-model="checkedNames" value="John" type="checkbox" name="john" id="john"> &NonBreakingSpace;
+          <input v-model="store.checkedNames" value="John" type="checkbox" name="john" id="john"> &NonBreakingSpace;
           John
         </label>
         <label for="mike">
-          <input v-model="checkedNames" value="Mike" type="checkbox" name="mike" id="mike"> &NonBreakingSpace;
+          <input v-model="store.checkedNames" value="Mike" type="checkbox" name="mike" id="mike"> &NonBreakingSpace;
           Mike
         </label>
       </div>
 
       <div>
-        <p>Picked: {{ radioPicked }}</p>
+        <p>Picked: {{ store.radioPicked }}</p>
         <label for="one">
-          <input v-model="radioPicked" value="One" type="radio" name="one" id="one"> &NonBreakingSpace;
+          <input v-model="store.radioPicked" value="One" type="radio" name="one" id="one"> &NonBreakingSpace;
           One
         </label>
         <label for="two">
-          <input v-model="radioPicked" value="Two" type="radio" name="two" id="two"> &NonBreakingSpace;
+          <input v-model="store.radioPicked" value="Two" type="radio" name="two" id="two"> &NonBreakingSpace;
           Two
         </label>
       </div>
 
       <div>
-        <p>Selected: {{ selectedInput }}</p>
+        <p>Selected: {{ store.selectedInput }}</p>
         <label for="select">
-          <select v-model="selectedInput" name="select" id="select">
+          <select v-model="store.selectedInput" name="select" id="select">
             <option value="" disabled>Please select one</option>
-            <option v-for="option in options" :key="option.value" :value="options.values">
+            <option v-for="option in store.options" :key="option.value" :value="store.options.values">
               {{ option.value }}
             </option>
           </select>
@@ -324,15 +285,15 @@
         <ButtonCounter :counterArg="6"/>
       </div>
 
-      <div>
+      <!-- <div>
         <h3>Titles to the BlogPosts</h3>
-        <div :style="{ fontSize: postFontSize + 'em' }">
+        <div :style="{ fontSize: store.postFontSize + 'em' }">
           <BlogPost
-            v-for="post in posts" :key="post.id"
-            :title="post.title" @enlarge-text="postFontSize += 0.1"
+            v-for="post in store.posts" :key="post.id"
+            :title="post.title" @enlarge-text="store.postFontSize += 0.1"
           />
         </div>
-      </div>
+      </div> -->
 
       <div>
         <AlertBox>
@@ -396,6 +357,12 @@
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
     margin: 0.5rem;
+  }
+
+  input,
+  textarea {
+    border: none;
+    outline: none;
   }
 
 </style>

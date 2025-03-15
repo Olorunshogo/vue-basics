@@ -1,7 +1,7 @@
 
 <script lang="ts" setup>
-  // import { useMouse } from '../composables/mouse';
   import { useMouse } from '../composables/mouse';
+  import { store } from '../stores/store'
 
   const { x, y } = useMouse();
 </script>
