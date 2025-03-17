@@ -23,6 +23,10 @@ import CompReusability from './components/CompReusability.vue'
 import BuiltInComponents from './components/BuiltInComponents.vue'
 import MyTransition from './components/MyTransition.vue'
 import MyModal from './components/MyModal.vue'
+import TestCompsView from './views/TestCompsView.vue'
+import ExtraTopicsView from './views/ExtraTopicsView.vue'
+import TestBuiltIn from './views/TestBuiltIn.vue'
+import ExTopicsComp from './components/ExTopicsComp.vue'
 
 const app = createApp(App)
 
@@ -40,6 +44,7 @@ app
   .component('LoadingComponent', LoadingComponent)
   .component('ErrorComponent', ErrorComponent)
   .component('CompReusability',CompReusability)
+  .component('ExTopicsComp', ExTopicsComp)
 
   // Async Component
   .component('MouseTracker', defineAsyncComponent(() =>
@@ -47,8 +52,11 @@ app
   ))
 
   // Views
+  .component('TestCompsView', TestCompsView)
   .component('TestEssentials', TestEssentials)
+  .component('TestBuiltIn', TestBuiltIn)
   .component('TestReusability', TestReusability)
+  .component('ExtraTopicsView', ExtraTopicsView)
 
   // Icons
   .component('IconCommunity', IconCommunity)

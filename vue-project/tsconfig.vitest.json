@@ -4,6 +4,7 @@
   "exclude": [],
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo",
+    "isolatedDeclarations": true, // Vite uses esbuild for transpilling TS and is subject to single-file transpile limitations.
 
     "lib": [],
     "types": ["node", "jsdom"]

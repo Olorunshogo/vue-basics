@@ -25,12 +25,17 @@ const router = createRouter({
     {
       path: '/testreusability',
       name: 'testreusability',
-      component:() => import('../views/TestReusability.vue'),
+      component: () => import('../views/TestReusability.vue'),
     },
     {
       path: '/testbuiltin',
       name: 'testbuiltin',
-      component:() => import('../views/TestBuiltIn.vue')
+      component: () => import('../views/TestBuiltIn.vue')
+    },
+    {
+      path: '/extratopics',
+      name: 'extratopics',
+      component: () => import('../views/ExtraTopicsView.vue'),
     },
   ],
 })
