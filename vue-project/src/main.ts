@@ -27,6 +27,8 @@ import TestCompsView from './views/TestCompsView.vue'
 import ExtraTopicsView from './views/ExtraTopicsView.vue'
 import TestBuiltIn from './views/TestBuiltIn.vue'
 import ExTopicsComp from './components/ExTopicsComp.vue'
+import UtilFormsview from './views/UtilFormsview.vue'
+import UtilForms from './components/UtilForms.vue'
 
 const app = createApp(App)
 
@@ -45,6 +47,7 @@ app
   .component('ErrorComponent', ErrorComponent)
   .component('CompReusability',CompReusability)
   .component('ExTopicsComp', ExTopicsComp)
+  .component('UtilForms', UtilForms)
 
   // Async Component
   .component('MouseTracker', defineAsyncComponent(() =>
@@ -64,6 +67,7 @@ app
   .component('IconEcosystem', IconEcosystem)
   .component('IconSupport', IconSupport)
   .component('IconTooling', IconTooling)
+  .component('UtilFormsView', UtilFormsview)
 
 
 app.use(createPinia())

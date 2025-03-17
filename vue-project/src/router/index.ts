@@ -37,6 +37,11 @@ const router = createRouter({
       name: 'extratopics',
       component: () => import('../views/ExtraTopicsView.vue'),
     },
+    {
+      path: '/utilforms',
+      name: 'utilforms',
+      component: () => import('../views/UtilFormsview.vue'),
+    },
   ],
 })
 
