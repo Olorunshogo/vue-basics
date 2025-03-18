@@ -1,19 +1,20 @@
 
-
 <script lang="ts" setup>
   import { useMouse, useInterval, useEventSource } from '@vueuse/core';
   import { othertopics } from '../stores/othertopics';
-  import { watchEffect } from 'vue';
+  import { watchEffect, ref } from 'vue';
 
   const { x, y } = useMouse();
-
   watchEffect(() => {
     othertopics.x = x.value;
     othertopics.y = y.value;
   });
   const counter = useInterval(3000);
 
-
+  const formItems = [
+    { id: 'name', label: 'Name: ', type: 'text', name: 'name', value: '', placeholder: 'Enter your name' },
+    { id: 'age', label: 'Age: ', type: 'number', name: 'age', value: 0, placeholder: 'Enter your age' },
+  ];
 
 </script>
 
@@ -35,54 +36,28 @@
               <p>Position is: {{ othertopics.x }}, {{ othertopics.y }}</p>
             </div>
 
-            <!-- useAnimate -->
-            <!-- <div>
-              <div class="flex items-center justify-center w-full h-60">
-                <p ref="el" class="text-5xl! text-yellow-600 items-center font-extrabold">VueUse Animate</p>
-              </div>
-
-              <div>
-                <button v-if="playState === 'running'" class="transition-btn" @click="pause">
-                  Pause
-                </button>
-                <button v-else @click="play">
-                  Play
-                </button>
-                <button @click="reverse">
-                  Reverse
-                </button>
-                <button @click="finish">
-                  Finish
-                </button>
-                <button @click="cancel">
-                  Cancel
-                </button>
-              </div>
-
-              <pre class="code-block">{{ text }}</pre>
-
-            </div> -->
-
             <!-- useInterval() -->
             <div>
               <p>Interval fired: {{ counter }}</p>
             </div>
-
-
-
-
           </div>
-
-
-
-
-
         </div>
+
+        <h2 class="my-2 text-xl font-semibold text-center">Vuelidate Forms</h2>
+
+        <div class="flex flex-wrap items-center gap-4">
+          <CustomForm
+            :action="'../Form/action.php'" :method="'POST'" :autocomplete="'on'"
+            :formItems="formItems"
+          >
+
+            <template #submitButton>
+              Submit Button
+            </template>
+          </CustomForm>
+        </div>
+
+
       </div>
   </div>
 </template>
-
-<style lang="css" scoped>
-
-
-</style>

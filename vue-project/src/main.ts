@@ -29,6 +29,7 @@ import TestBuiltIn from './views/TestBuiltIn.vue'
 import ExTopicsComp from './components/ExTopicsComp.vue'
 import UtilFormsview from './views/UtilFormsview.vue'
 import UtilForms from './components/UtilForms.vue'
+import CustomForm from './components/CustomForm.vue'
 
 const app = createApp(App)
 
@@ -48,6 +49,7 @@ app
   .component('CompReusability',CompReusability)
   .component('ExTopicsComp', ExTopicsComp)
   .component('UtilForms', UtilForms)
+  .component('CustomForm', CustomForm)
 
   // Async Component
   .component('MouseTracker', defineAsyncComponent(() =>
