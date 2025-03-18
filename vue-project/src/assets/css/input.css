@@ -1,5 +1,7 @@
 
 @import "tailwindcss";
+@import "/vue-project/formkit.theme.ts";
+
 
 /* Animate.css */
 /* @import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"; */
@@ -33,4 +35,8 @@
     opacity: 0.9;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
+ }
+
+ @layer base {
+
  }

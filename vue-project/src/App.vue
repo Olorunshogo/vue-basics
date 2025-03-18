@@ -47,7 +47,8 @@
           <RouterLink to="/testreusability" target="_blank">Test Reusability</RouterLink>
           <RouterLink to="/testbuiltin" target="_blank">Test BuiltIn</RouterLink>
           <RouterLink to="/extratopics" target="_blank">Extra Topics</RouterLink>
-          <RouterLink to="/utilforms" target="_blank">Utils and Forms</RouterLink>
+          <RouterLink to="/utilities" target="_blank">Utilities</RouterLink>
+          <RouterLink to="/forms" target="_blank">Forms</RouterLink>
         </nav>
       </div>
     </header>

@@ -9,12 +9,8 @@
     othertopics.x = x.value;
     othertopics.y = y.value;
   });
-  const counter = useInterval(3000);
+  const counter = useInterval(2000);
 
-  const formItems = [
-    { id: 'name', label: 'Name: ', type: 'text', name: 'name', value: '', placeholder: 'Enter your name' },
-    { id: 'age', label: 'Age: ', type: 'number', name: 'age', value: 0, placeholder: 'Enter your age' },
-  ];
 
 </script>
 
@@ -42,22 +38,8 @@
             </div>
           </div>
         </div>
-
-        <h2 class="my-2 text-xl font-semibold text-center">Vuelidate Forms</h2>
-
-        <div class="flex flex-wrap items-center gap-4">
-          <CustomForm
-            :action="'../Form/action.php'" :method="'POST'" :autocomplete="'on'"
-            :formItems="formItems"
-          >
-
-            <template #submitButton>
-              Submit Button
-            </template>
-          </CustomForm>
-        </div>
-
-
       </div>
   </div>
 </template>
+
+

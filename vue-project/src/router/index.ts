@@ -38,9 +38,14 @@ const router = createRouter({
       component: () => import('../views/ExtraTopicsView.vue'),
     },
     {
-      path: '/utilforms',
-      name: 'utilforms',
-      component: () => import('../views/UtilFormsview.vue'),
+      path: '/utilities',
+      name: 'utilities',
+      component: () => import('../views/UtilView.vue'),
+    },
+    {
+      path: '/forms',
+      name: 'forms',
+      component: () => import('../views/FormKit.vue'),
     },
   ],
 })

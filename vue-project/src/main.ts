@@ -1,6 +1,7 @@
 
 import { createApp, defineAsyncComponent, onMounted } from 'vue'
 import { createPinia } from 'pinia'
+// import config from '../formkit.config.ts'
 
 import App from './App.vue'
 import router from './router'
@@ -27,9 +28,10 @@ import TestCompsView from './views/TestCompsView.vue'
 import ExtraTopicsView from './views/ExtraTopicsView.vue'
 import TestBuiltIn from './views/TestBuiltIn.vue'
 import ExTopicsComp from './components/ExTopicsComp.vue'
-import UtilFormsview from './views/UtilFormsview.vue'
-import UtilForms from './components/UtilForms.vue'
 import CustomForm from './components/CustomForm.vue'
+import FormKit from './views/FormKit.vue'
+import UtilView from './views/UtilView.vue'
+import UtiliTies from './components/UtiliTies.vue'
 
 const app = createApp(App)
 
@@ -48,7 +50,7 @@ app
   .component('ErrorComponent', ErrorComponent)
   .component('CompReusability',CompReusability)
   .component('ExTopicsComp', ExTopicsComp)
-  .component('UtilForms', UtilForms)
+  .component('UtiliTies', UtiliTies)
   .component('CustomForm', CustomForm)
 
   // Async Component
@@ -62,6 +64,8 @@ app
   .component('TestBuiltIn', TestBuiltIn)
   .component('TestReusability', TestReusability)
   .component('ExtraTopicsView', ExtraTopicsView)
+  .component('FormKit', FormKit)
+  .component('UtilView', UtilView)
 
   // Icons
   .component('IconCommunity', IconCommunity)
@@ -69,7 +73,6 @@ app
   .component('IconEcosystem', IconEcosystem)
   .component('IconSupport', IconSupport)
   .component('IconTooling', IconTooling)
-  .component('UtilFormsView', UtilFormsview)
 
 
 app.use(createPinia())
