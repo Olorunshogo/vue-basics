@@ -49,6 +49,7 @@
           <RouterLink to="/extratopics" target="_blank">Extra Topics</RouterLink>
           <RouterLink to="/utilities" target="_blank">Utilities</RouterLink>
           <RouterLink to="/forms" target="_blank">Forms</RouterLink>
+          <RouterLink to="/api" target="_blank">Api Calls</RouterLink>
         </nav>
       </div>
     </header>

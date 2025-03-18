@@ -32,6 +32,8 @@ import CustomForm from './components/CustomForm.vue'
 import FormKit from './views/FormKit.vue'
 import UtilView from './views/UtilView.vue'
 import UtiliTies from './components/UtiliTies.vue'
+import ApiView from './views/ApiView.vue'
+import ApiCalls from './components/ApiCalls.vue'
 
 const app = createApp(App)
 
@@ -52,6 +54,7 @@ app
   .component('ExTopicsComp', ExTopicsComp)
   .component('UtiliTies', UtiliTies)
   .component('CustomForm', CustomForm)
+  .component('ApiCalls', ApiCalls)
 
   // Async Component
   .component('MouseTracker', defineAsyncComponent(() =>
@@ -66,6 +69,7 @@ app
   .component('ExtraTopicsView', ExtraTopicsView)
   .component('FormKit', FormKit)
   .component('UtilView', UtilView)
+  .component('ApiView', ApiView)
 
   // Icons
   .component('IconCommunity', IconCommunity)

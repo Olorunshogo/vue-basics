@@ -47,6 +47,12 @@ const router = createRouter({
       name: 'forms',
       component: () => import('../views/FormKit.vue'),
     },
+
+    {
+      path: '/api',
+      name: 'api',
+      component: () => import('../views/ApiView.vue'),
+    },
   ],
 })
 
