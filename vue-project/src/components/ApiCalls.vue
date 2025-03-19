@@ -112,8 +112,6 @@
     }, 1500)
   });
 
-  
-
 
 </script>
 
@@ -150,20 +148,7 @@
 
       </div>
 
-
-
-
-
     </div>
   </div>
 </template>
-
-<style lang="css" scoped>
-  .formkit {
-    border: 1px solid red;
-    width: 400px;
-    height: 50px;
-    border-radius:0.5rem;
-  }
-</style>
 
